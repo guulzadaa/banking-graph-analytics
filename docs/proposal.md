@@ -17,7 +17,7 @@ Reviewing separate records can also make it difficult to compare incoming and ou
 
 The proposed service will combine PDF imports and manually entered transactions into a unified dataset. It will provide financial summaries, interactive graph exploration, and an intelligent chat assistant. Users will be able to inspect the transactions supporting a chat answer and view relevant connections in the graph. The identified user needs will be validated through discussions with potential users.
 
-### 1.2. ## Target Users
+### 1.2. Target Users
 
 The primary target users are individuals who want to understand and manage their personal income and expenses, particularly those using accounts at Kaspi, Halyk, and Freedom.
 
