@@ -1,10 +1,6 @@
-# FinIG Architecture Description
+# Architecture Description
 
-**Project:** Development of a Web Service for Analyzing Banking Operations with Graph Analytics and an Intelligent Chat Assistant  
-**Status:** Architecture baseline; implementation and verification pending.  
-**Related tasks:** BOA-9 — System Context; BOA-10 — Use Case; BOA-11 — Component Diagram Draft.
-
-## I. Overview
+## 1. Overview
 
 FinIG is a browser-based client–server application for analysing personal finances. Users import supported PDF statements from Kaspi, Halyk and Freedom, add manual transactions, review duplicates and internal transfers, and explore a unified table, dashboard, graph and intelligent chat.
 
@@ -14,7 +10,7 @@ The architecture prioritises user-owned data, exact calculations per currency, r
 
 Scope excludes live bank integration, payments, scanned-statement OCR, universal PDF layouts, automatic currency conversion, native mobile apps and professional accounting or investment advice.
 
-## II. Diagrams and Conventions
+## 2. Diagrams and Conventions
 
 | Diagram | Notation and scope | Source |
 | --- | --- | --- |
@@ -26,9 +22,9 @@ The component view includes frontend, backend modules and external dependencies;
 
 Image paths follow the supplied repository screenshots: files are directly in `diagrams/`, while this document belongs in `docs/architecture/overview.md`. Merge the diagram branches into the document's branch so the images and source links resolve.
 
-## III. System Context
+## 3. System Context
 
-![FinIG System Context Diagram](../../diagrams/system-context.svg)
+![FinIG System Context Diagram](../system-context.png)
 
 *Figure 1. FinIG users, system boundary and external LLM dependency.*
 
@@ -40,9 +36,9 @@ Image paths follow the supplied repository screenshots: files are directly in `d
 
 **Google authentication.** FR-01 and its acceptance tests require email/password and Google sign-in. Google receives authentication traffic, not financial records. Identities are validated using provider identifiers; matching email addresses alone do not link accounts. Google is missing from the current context and component drawings and must be added in their next revision.
 
-## IV. Use Cases and Requirements
+## 4. Use Cases and Requirements
 
-![FinIG Use Case Diagram](../../diagrams/use-case.svg)
+![FinIG Use Case Diagram](../diagrams/use-case.png)
 
 *Figure 2. Main user goals for visitors and authenticated users.*
 
@@ -64,7 +60,7 @@ UC identifiers below are document-local traceability labels; the diagram itself 
 
 UC-01 is available to visitors; all remaining use cases require authentication and resource-ownership checks. Complete import deletion (FR-08) is optional and belongs to import management. Three-language chat is mandatory under FR-18; full interface localisation is optional under NFR-12. The current English UX prototype does not change these priorities.
 
-## V. Runtime Containers and Technologies
+## 5. Runtime Containers and Technologies
 
 | Element | Technology | Responsibility |
 | --- | --- | --- |
@@ -79,9 +75,9 @@ UC-01 is available to visitors; all remaining use cases require authentication a
 
 The browser uses REST/JSON and multipart PDF uploads; it never accesses the database directly. A dedicated library extracts PDF content before Pandas normalisation. NetworkX constructs graphs from PostgreSQL records, so a separate graph database is unnecessary for the initial design.
 
-## VI. Backend Components
+## 6. Backend Components
 
-![FinIG Component Diagram Draft](../../diagrams/component-diagram-draft.svg)
+![FinIG Component Diagram Draft](../diagrams/component-diagram-draft.png)
 
 *Figure 3. Application components and their main dependencies.*
 
@@ -98,7 +94,7 @@ Import processing is grouped under Transaction Management and can be separated i
 
 Analytics share one duplicate-resolution and classification policy. Mutations and dataset-revision updates commit together. PDF extraction uses bounded processing with a timeout; an import completes only when its entire validated transaction batch commits. No separate queue service is required initially.
 
-## VII. Data and Consistency Rules
+## 7. Data and Consistency Rules
 
 The proposed logical model contains the following entities; the physical database schema remains to be implemented.
 
@@ -125,7 +121,7 @@ The baseline adopts the proposed transfer, editing and retention rules from requ
 - **Evidence freshness:** relevant changes increment the dataset revision. Earlier chat answers become outdated and offer recalculation. Edits or deletions revalidate dependent duplicate and transfer relationships.
 - **PDF retention:** files use server-generated names in private storage and are removed after processing, within the proposed 24-hour maximum. Startup/periodic cleanup handles abandoned files. Source references remain, but original PDFs are not retained in the database or logs.
 
-## VIII. Key Scenarios
+## 8. Key Scenarios
 
 **A. First use and import.** Register/sign in → create an account → upload a PDF → validate size, pages, encryption, text and layout → extract and normalise records → commit the complete batch → show results and review candidates. Headers and balances are excluded; ambiguous required values cause an error. Retrying the same request key does not duplicate the batch; a deliberate new upload undergoes duplicate review.
 
@@ -141,7 +137,7 @@ Supported questions cover income, expenses, highest-expense categories, transact
 
 **F. Recovery.** Invalid or unsupported PDFs produce a clear reason and another-upload option; failed imports leave no partial batch. LLM failure offers retry while tables and summaries remain usable.
 
-## IX. Deployment
+## 9. Deployment
 
 **Decision:** run the initial application locally with Docker Compose for reproducible development, testing and demonstration. Hosting and a public server are deferred.
 
@@ -159,7 +155,7 @@ Authentication uses maintained password hashing and revocable sessions. Proposed
 
 Implementation must provide Compose/Docker definitions, pinned dependencies, migrations, placeholder configuration, synthetic/anonymised fixtures and startup/test instructions. Reference testing uses at least 4 logical CPU cores, 8 GB RAM, one active user and up to 10,000 transactions. Proposed limits are 10 MB, 20 pages and 1,000 transactions per PDF; displayed graphs are limited to 200 nodes and 500 edges, with filtering or explicit omission notices.
 
-## X. Consistency and Verification
+## 10. Consistency and Verification
 
 | Check | Finding or follow-up |
 | --- | --- |
@@ -175,7 +171,7 @@ Verification follows `requirements.md`: ownership/authentication tests; at least
 
 Performance targets remain unmeasured: imports within 30 seconds in five runs per layout; table/dashboard within 2 seconds and graph within 5 seconds for at least 19 of 20 actions per view; chat timeout feedback within 30 seconds. Record fixtures, commit, environment, expected/actual output and pass/fail evidence. All Must criteria must pass; deferred Should items need documented reasons.
 
-## XI. Open Points
+## 11. Open Points
 
 - Confirm the three PDF layouts and select an extraction library using anonymised samples.
 - Select the LLM provider/model and document allowed fields for each analytical function.
