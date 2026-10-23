@@ -1,0 +1,52 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor white
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam dpi 200
+skinparam ArrowColor #64748B
+skinparam ArrowFontColor #334155
+skinparam ArrowFontSize 13
+skinparam packageStyle rectangle
+skinparam packageBackgroundColor #F7FAFD
+skinparam packageBorderColor #9FB3C8
+skinparam componentStyle uml2
+skinparam componentBackgroundColor #E7F0FB
+skinparam componentBorderColor #1769B5
+skinparam componentFontColor #133B61
+skinparam nodesep 35
+skinparam ranksep 45
+top to bottom direction
+title Banking Operations Analysis — Component Diagram (Draft)
+package "Browser / Frontend — Angular" {
+ component "Web Interface\nLogin, accounts, transactions, PDF import and chat\nCharts: ECharts | Graph: Cytoscape.js\nAPI client: Angular HttpClient" as ui
+}
+package "Backend — Python / FastAPI (one application)" {
+ component "REST API and Access Control\nAuthentication, ownership, Pydantic validation" as api
+ component "Transaction Management\nAccounts, wallets, manual CRUD and categories\nPDF import / validation / Pandas normalisation\nDuplicate and internal-transfer review" as tx
+ component "Chat Assistant\nOrchestration and controlled read-only functions" as chat
+ component "Financial Analytics\nExact decimal calculations per currency" as fin
+ component "Graph Analytics\nNetworkX; identifier-based connections" as graph
+ component "Data Access\nSQLAlchemy; user-owned records and decisions" as data
+ api ..> tx
+ api ..> chat
+ api ..> fin
+ api ..> graph
+ chat ..> fin
+ chat ..> graph
+ tx ..> data
+ fin ..> data
+ graph ..> data
+}
+database "PostgreSQL\nAuthoritative data store" as db #E8F1EA
+component "External LLM API\nProvider undecided" as llm #E5E7EB
+ui ..> api : HTTPS REST\nJSON / multipart PDFs
+chat ..> llm : Sanitised context\nHTTPS API
+data ..> db
+legend bottom
+Dashed arrows: main dependencies; results and evidence return to the caller.
+Duplicates count once; confirmed internal transfers are excluded from income / expenses.
+LLM has no direct database access or write tools. PDF extraction library: undecided.
+endlegend
+@enduml
