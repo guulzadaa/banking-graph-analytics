@@ -2,7 +2,7 @@
 
 **Project:** Development of a Web Service for Bank Transaction Analysis with Graph Analytics and an Intelligent Chat Assistant  
 **Research period:** October 19-21, 2026  
-**Research method:** Semi-structured individual interviews using eight questions 
+**Research method:** Semi-structured individual interviews using eight questions  
 **Participants:** Five potential users (four students and one employee)  
 **Primary evidence:** Findings from interviews summarized in Section 3 (Interview Results). The interview questions are provided in Appendix A
 **Document status:** Final synthesis of the five interviews reported by the project team
@@ -109,7 +109,7 @@ These are evidence-informed **candidate requirements**, to be refined in the sep
 
 The interviews also generated proposals that are valuable but should **not silently become mandatory diploma-project deliverables**.
 
-| Requested idea | Participant(s) | Decision at this stage |
+| Requested idea | Participants | Decision at this stage |
 |---|---|---|
 | Daily “Safe-to-Spend” indicator and advanced budget forecasts | P1 | Record as a possible future enhancement; requires definitions of recurring costs, incomplete data handling, and forecast validation. |
 | Automatic or intelligent transaction tagging | P2 | Consider progressively; basic classification and transparent corrections should be evaluated before assuming reliable automation. |
@@ -142,7 +142,7 @@ One of the goals of this document is to make the basis of project decisions trac
 - **Self-reported experiences:** Statements about the banking applications reflect users' experiences and opinions, not independently tested application capabilities.
 - **Scope of collected evidence:** Only the interview responses supplied for this report were analyzed; no live financial accounts, exported bank statements, usability observations, or system performance measurements were provided.
 - **Data minimization:** The report uses participant codes and does not include names, account numbers, account balances, or identifiable transaction records. Future prototype testing should use synthetic or appropriately de-identified financial data and obtain relevant permissions if personal data is collected.
-- **Unrecorded metadata:** Interview channel, duration, and consent-record details were not supplied. The team should keep any available interview documentation separately rather than inventing it here.
+
 
 ## 7. Conclusion
 
