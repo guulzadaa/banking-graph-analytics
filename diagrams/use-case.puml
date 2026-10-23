@@ -1,0 +1,48 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor white
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam dpi 200
+skinparam ArrowColor #60758A
+skinparam packageStyle rectangle
+skinparam packageBackgroundColor #F8FAFC
+skinparam packageBorderColor #94A3B8
+skinparam componentStyle uml2
+skinparam componentBackgroundColor #1769B5
+skinparam componentFontColor white
+skinparam componentBorderColor #1769B5
+skinparam usecaseBackgroundColor #EAF2FB
+skinparam usecaseBorderColor #1769B5
+skinparam nodesep 25
+skinparam ranksep 50
+left to right direction
+title Banking Operations Analysis — Use Cases
+actor Visitor as visitor
+actor "Authenticated User" as user
+rectangle "Banking Operations Analysis Web Service" {
+ usecase "Register / Log In" as login
+ usecase "Log Out" as logout
+ usecase "Manage Accounts\nand Cash Wallets" as accounts
+ usecase "Manage Transactions\nManual entry, editing and categories" as tx
+ usecase "Import PDF Statements\nUpload and review results" as pdf
+ usecase "Review Duplicates\nConfirm or reverse decisions" as dup
+ usecase "Review Internal Transfers\nConfirm or reverse classification" as transfer
+ usecase "View Financial Dashboard\nIncome, expenses and trends" as dashboard
+ usecase "Explore Transaction Graph\nFilter and inspect connections" as graph
+ usecase "Ask Analytical Questions\nand Read Answers" as chat
+ usecase "Inspect Supporting Records\nand Graph Connections" as evidence
+}
+visitor -- login
+user -- logout
+user -- accounts
+user -- tx
+user -- pdf
+user -- dup
+user -- transfer
+user -- dashboard
+user -- graph
+user -- chat
+user -- evidence
+@enduml
