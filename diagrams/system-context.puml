@@ -1,0 +1,35 @@
+@startuml
+!pragma layout smetana
+skinparam backgroundColor white
+skinparam defaultFontName SansSerif
+skinparam defaultFontSize 16
+skinparam shadowing false
+skinparam dpi 200
+skinparam ArrowColor #64748B
+skinparam ArrowFontColor #334155
+skinparam ArrowFontSize 14
+skinparam roundcorner 6
+skinparam nodesep 45
+skinparam ranksep 65
+skinparam padding 12
+skinparam rectangleFontColor white
+skinparam rectangleBorderColor transparent
+skinparam defaultTextAlignment center
+top to bottom direction
+title
+Banking Operations Analysis
+System Context
+end title
+rectangle "<size:30><&person></size>\n<b>Individual User</b>\n<size:12>[Person]</size>\n\nManages and analyses\npersonal financial transactions" as user #104879
+rectangle "<b>Banking Operations Analysis</b>\n<b>Web Service</b>\n<size:12>[Software System]</size>\n\nCombines PDF and manual records.\nProvides financial summaries, graphs\nand chat answers with supporting evidence." as app #1769B5
+rectangle "<b>External LLM API</b>\n<size:12>[External Software System]</size>\n\nInterprets questions and explains results.\nProvider to be selected." as llm #737D89
+user --> app : Registers and signs in; uploads PDFs;\nmanages records; explores analytics; asks questions\n[HTTPS]
+app --> user : Shows transactions, charts, graphs\nand answers with supporting records
+app --> llm : Sends limited sanitised context\nand backend-calculated results\n[HTTPS API]
+llm --> app : Returns interpretations and explanations\nfor application validation
+legend bottom
+PDF files: Kaspi, Halyk and Freedom; supplied by the user.
+One selected text-based layout per bank. No live bank integration.
+LLM: no raw PDFs, credentials, full account IDs or database access.
+endlegend
+@enduml
