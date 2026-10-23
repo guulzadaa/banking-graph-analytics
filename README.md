@@ -78,18 +78,36 @@ The repository structure will evolve as the project develops.
 ├── diagrams/
 ├── docs/
 ├── frontend/
+├── prototype/
 ├── tests/
 └── README.md
 ```
 
 ## Project Documentation
 
-Currently prepared:
+The project documentation is organized in the `docs/`, `diagrams/`, and `prototype/` directories.
 
-- [Project Proposal and Scope](docs/proposal.md)
+### Research and Analysis
+- [Project Proposal and Scope](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/proposal.md)
+- [Evidence of Relevance](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/evidence-of-relevance.md)
+- [Literature Review](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/literature-review.md)
+- [Existing System Comparison](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/existing-system-comparison.md)
+- [Technology Comparison](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/technology-comparison.md)
 
-Other documents are still in preparation and will be added as they are completed.
+### Requirements and Architecture
+- [Requirements Specification and Acceptance Criteria](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/requirements.md)
+- [Architecture Description](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/architecture.md)
+- [System Context Diagram](https://github.com/guulzadaa/banking-graph-analytics/blob/main/diagrams/system-context.svg) ([Editable Source](https://github.com/guulzadaa/banking-graph-analytics/blob/main/diagrams/system-context.puml))
+- [Use Case Diagram](https://github.com/guulzadaa/banking-graph-analytics/blob/main/diagrams/use-case.svg) ([Editable Source](https://github.com/guulzadaa/banking-graph-analytics/blob/main/diagrams/use-case.puml))
+- [Component Diagram (Draft)](https://github.com/guulzadaa/banking-graph-analytics/blob/main/diagrams/component-diagram-draft.svg) ([Editable Source](https://github.com/guulzadaa/banking-graph-analytics/blob/main/diagrams/component-diagram-draft.puml))
 
+### Prototype and Evaluation
+- [Prototype Materials](https://github.com/guulzadaa/banking-graph-analytics/tree/main/prototype)
+- [Verification and Evaluation Plan](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/verification-and-evaluation-plan.md)
+
+### Project Management
+- [Project Management and Risks](https://github.com/guulzadaa/banking-graph-analytics/blob/main/docs/project-management.md)
+- [YouTrack Project](https://banking-graph-analytics.youtrack.cloud/projects/BOA)
 ## Project Management
 
 **YouTrack Project:** https://banking-graph-analytics.youtrack.cloud/projects/BOA
@@ -98,14 +116,14 @@ Work will be tracked through assigned YouTrack tasks. Changes will reference tas
 
 ## Team Members
 
-- Inabat Medetkyzy
-- Gulzada Issa
+- **Inabat Medetkyzy - Backend Developer:** Backend architecture, database, transaction processing, financial and graph analytics, LLM integration, and API testing.
+- **Gulzada Issa - Frontend Developer:** User interface, financial dashboard, transaction management, graph visualisation, chat interface, and frontend testing.
 
 **Project Supervisor:** Almas Myrzakhmetov
 
 ## Project Status
 
-The project is in the planning and documentation stage. The shared repository and YouTrack project have been created, and the Project Proposal and Scope document is prepared. Other deliverables are in progress.
+The project is currently in the analysis and design stage (Pre-defense 1). The team has established the GitHub repository and YouTrack project and prepared the initial project documentation, requirements, architectural design, and prototype materials. Application implementation and evaluation are planned for the following development stages.
 
 ## Setup and Testing
 
