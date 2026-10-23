@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FinIG — Personal Finance</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div id="app">
+    <div class="loading">
+      <h1>FinIG</h1>
+      <p>Loading your workspace…</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <noscript>Please enable JavaScript to use FinIG.</noscript>
+
+  <script src="https://cdn.jsdelivr.net/npm/typescript@5.7.3/lib/typescript.js"></script>
+
+  <script type="module">
+    const app = document.getElementById("app");
+
+    try {
+      if (location.protocol === "file:") {
+        throw new Error("Open index.html with Live Server.");
+      }
+
+      if (!window.ts) {
+        throw new Error(
+          "The TypeScript compiler could not load. Check your internet connection."
+        );
+      }
+
+      const response = await fetch("./app.ts");
+
+      if (!response.ok) {
+        throw new Error("app.ts was not found. Keep all three files together.");
+      }
+
+      const source = await response.text();
+
+      const result = window.ts.transpileModule(source, {
+        reportDiagnostics: true,
+        compilerOptions: {
+          target: window.ts.ScriptTarget.ES2020,
+          module: window.ts.ModuleKind.ESNext
+        }
+      });
+
+      const errors = (result.diagnostics || []).filter(
+        item => item.category === window.ts.DiagnosticCategory.Error
+      );
+
+      if (errors.length) {
+        throw new Error(
+          window.ts.flattenDiagnosticMessageText(
+            errors[0].messageText,
+            "\n"
+          )
+        );
+      }
+
+      const url = URL.createObjectURL(
+        new Blob([result.outputText], { type: "text/javascript" })
+      );
+
+      try {
+        await import(url);
+      } finally {
+        URL.revokeObjectURL(url);
+      }
+    } catch (error) {
+      app.innerHTML = "";
+
+      const panel = document.createElement("section");
+      const title = document.createElement("h1");
+      const message = document.createElement("p");
+
+      panel.className = "loading";
+      title.textContent = "FinIG could not start";
+      message.textContent = error.message;
+
+      panel.append(title, message);
+      app.append(panel);
+    }
+  </script>
+</body>
+</html>
